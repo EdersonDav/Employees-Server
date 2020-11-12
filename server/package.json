@@ -6,7 +6,12 @@
   "repository": "https://github.com/EdersonDav/Allugator.git",
   "author": "Ederson Davi",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "sucrase": "^3.16.0"
   }
 }
