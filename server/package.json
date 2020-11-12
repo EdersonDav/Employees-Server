@@ -1,0 +1,12 @@
+{
+  "name": "Allugator_Test",
+  "version": "1.0.0",
+  "description": "Teste Vaga Dev",
+  "main": "index.js",
+  "repository": "https://github.com/EdersonDav/Allugator.git",
+  "author": "Ederson Davi",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
