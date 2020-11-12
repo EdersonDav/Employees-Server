@@ -7,7 +7,7 @@
   "author": "Ederson Davi",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "server": "nodemon index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
