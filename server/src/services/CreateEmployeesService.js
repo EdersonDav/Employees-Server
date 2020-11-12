@@ -25,7 +25,11 @@ const createEmployeesService = () => {
   })
 
   rl.on('close', () =>{
-    //console.log(funcionarios);
+    for(let i = 0; i < employees.length; i++){
+      if(employees[i + 1]){
+        employees[i] = employees[i + 1]
+      }
+    }
   })
 
   return employees
