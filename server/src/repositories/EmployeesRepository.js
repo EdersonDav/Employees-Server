@@ -15,8 +15,18 @@ const employeesMethods = {
       }
     })
     return employee;
-  }
+  },
 
+  countByState:() =>{
+    const countState = {}
+    employees.forEach(emp =>{
+      if(countState[emp.ufNascimento] == undefined){
+        countState[emp.ufNascimento] = 0
+      }
+      countState[emp.ufNascimento] += 1
+    })
+    return countState
+  }
 }
 
 export default employeesMethods;

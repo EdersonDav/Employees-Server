@@ -9,6 +9,11 @@ routes.get('/search', (require, response) => {
   response.json({searchEmployee})
 })
 
+routes.get('/byState', (require, response) => {
+  const byState = employeesMethods.countByState();
+  response.json(byState)
+})
+
 routes.get('/', (require, response) => {
   const allEmployees = employeesMethods.getAll();
   response.json({allEmployees})

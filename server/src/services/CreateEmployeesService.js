@@ -25,11 +25,7 @@ const createEmployeesService = () => {
   })
 
   rl.on('close', () =>{
-    for(let i = 0; i < employees.length; i++){
-      if(employees[i + 1]){
-        employees[i] = employees[i + 1]
-      }
-    }
+    delete employees[0]
   })
 
   return employees
