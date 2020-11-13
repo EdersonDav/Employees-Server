@@ -1,9 +1,9 @@
 import createEmployeesService from '../services/CreateEmployeesService';
+import createNewDataBaseService from '../services/CreateNewDataBaseService';
 
-const employees = createEmployeesService();
+let employees = createEmployeesService();
 
 const employeesMethods = {
-
   getAll: () =>{
     return employees
   },
@@ -32,6 +32,22 @@ const employeesMethods = {
     const employeesRange = employees.filter(emp => emp.salario >= min && emp.salario <= max)
 
     return employeesRange
+  },
+
+  deleteEmployee: (cpf)=>{
+    try{
+      const newEmployees = employees.filter(emp => emp.cpf != cpf)
+
+      createNewDataBaseService(newEmployees);
+
+      setTimeout(() => {
+        employees = createEmployeesService();
+      }, 3000);
+
+      return {message: 'Employeer deleted'}
+    }catch(e){
+      return {message: 'Erro ao deletar'}
+    }
   }
 
 }

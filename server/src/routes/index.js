@@ -6,7 +6,7 @@ const routes = Router();
 routes.get('/search', (require, response) => {
   const {key, value} = require.body
   const searchEmployee = employeesMethods.search(key, value );
-  response.json({searchEmployee})
+  response.json(searchEmployee)
 })
 
 routes.get('/byState', (require, response) => {
@@ -22,7 +22,13 @@ routes.get('/salary', (require, response) => {
 
 routes.get('/', (require, response) => {
   const allEmployees = employeesMethods.getAll();
-  response.json({allEmployees})
+  response.json(allEmployees)
+})
+
+routes.delete('/:cpf', (require, response) => {
+  const {cpf} = require.params
+  const newEmployees = employeesMethods.deleteEmployee(cpf)
+  response.json(newEmployees)
 })
 
 export default routes;
