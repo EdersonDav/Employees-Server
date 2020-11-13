@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 const CreateNewDataBase = async (employees) =>{
   const pathTXT = 'src/database/Base de dados - Funcionários.txt'
@@ -19,4 +19,4 @@ const CreateNewDataBase = async (employees) =>{
   })
 }
 
-export default CreateNewDataBase
+module.exports = CreateNewDataBase

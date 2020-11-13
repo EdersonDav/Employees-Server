@@ -1,6 +1,6 @@
-import createEmployeesService from '../services/CreateEmployeesService';
-import createNewDataBaseService from '../services/CreateNewDataBaseService';
-import dataValidations from './validations'
+const createEmployeesService = require('../services/CreateEmployeesService');
+const createNewDataBaseService = require('../services/CreateNewDataBaseService');
+const dataValidations = require('./validations');
 
 //Criando a lista de funcionarios
 let employees = createEmployeesService();
@@ -90,8 +90,6 @@ const employeesMethods = {
 
       dataValidations("Status", status)
 
-
-
       const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
 
       const [employeeExists] = employees.filter(emp => emp.cpf == cpf)
@@ -124,7 +122,7 @@ const employeesMethods = {
 
 }
 
-export default employeesMethods;
+module.exports = employeesMethods;
 
 
 

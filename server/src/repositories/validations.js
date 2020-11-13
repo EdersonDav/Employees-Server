@@ -78,4 +78,4 @@ const dataValidation= ( type, data, employees = null)=>{
   }
 }
 
-export default dataValidation
+module.exports = dataValidation

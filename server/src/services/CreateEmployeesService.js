@@ -1,12 +1,17 @@
-import readline from 'readline';
-import fs from 'fs';
-import path from 'path';
+const readline = require('readline');
+const fs = require('fs');
+const path = require('path');
 
-const createEmployeesService = () => {
+const createEmployeesService = ( isTest = false) => {
   const employees = []
 
+  let pathTXT = isTest ? path.resolve(__dirname, '..', 'database', 'fakes', 'txtTest.txt' ) :
+   path.resolve(__dirname, '..', 'database','Base de dados - Funcionários.txt')
+
+  console.log(pathTXT);
+
   const rl = readline.createInterface({
-    input : fs.createReadStream(path.resolve(__dirname, '..', 'database','Base de dados - Funcionários.txt'))
+    input : fs.createReadStream(pathTXT)
   })
 
   rl.on('line',(line) => {
@@ -31,4 +36,4 @@ const createEmployeesService = () => {
   return employees
 }
 
-export default createEmployeesService;
+module.exports =  createEmployeesService;

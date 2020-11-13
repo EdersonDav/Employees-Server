@@ -1,7 +1,7 @@
-import {Router} from 'express';
-import employeesMethods from '../repositories/EmployeesRepository'
+const express = require('express');
+const employeesMethods = require('../repositories/EmployeesRepository');
 
-const routes = Router();
+const routes = express.Router();
 
 routes.get('/search', (require, response) => {
   const {key, value} = require.body
@@ -40,4 +40,4 @@ routes.post('/', (require, response) => {
   response.json(newEmployees)
 })
 
-export default routes;
+module.exports = routes;
