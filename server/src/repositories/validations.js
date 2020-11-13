@@ -75,6 +75,12 @@ const dataValidation= ( type, data, employees = null)=>{
         throw new Error("Invalid Status")
       }
       break;
+      case "CPFCreate":
+      //Verificando se CPF é numero e se tem o tamanho de 11
+      if(isNaN(data) || data.length != 11){
+        throw new Error("Invalid CPF")
+      }
+      break;
   }
 }
 

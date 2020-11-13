@@ -82,7 +82,7 @@ const employeesMethods = {
     try{
       dataValidations("Date", dataCadastro)
 
-      dataValidations("CPF", cpf, employees)
+      dataValidations("CPFCreate", cpf, employees)
 
       dataValidations("UF", ufNascimento)
 

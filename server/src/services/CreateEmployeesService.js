@@ -2,13 +2,11 @@ const readline = require('readline');
 const fs = require('fs');
 const path = require('path');
 
-const createEmployeesService = ( isTest = false) => {
+const createEmployeesService = ( isTest = "") => {
   const employees = []
 
-  let pathTXT = isTest ? path.resolve(__dirname, '..', 'database', 'fakes', 'txtTest.txt' ) :
+  let pathTXT = isTest !="" ? path.resolve(__dirname, '..', 'database', 'fakes', `${isTest}` ) :
    path.resolve(__dirname, '..', 'database','Base de dados - Funcionários.txt')
-
-  console.log(pathTXT);
 
   const rl = readline.createInterface({
     input : fs.createReadStream(pathTXT)

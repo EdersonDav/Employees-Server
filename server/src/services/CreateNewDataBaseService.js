@@ -1,11 +1,13 @@
 const fs = require('fs');
 
-const CreateNewDataBase = async (employees) =>{
-  const pathTXT = 'src/database/Base de dados - Funcionários.txt'
+const CreateNewDataBase = (employees, isTest = "") =>{
+  const pathTXT = !isTest ? 'src/database/Base de dados - Funcionários.txt':
+  `src/database/fakes/${isTest}`
+
   const dataL1 = "DataCad;Cargo;Cpf;Nome;UfNasc;Salario;Status\n"
 
   fs.writeFile(pathTXT,"", (error) => {
-    if (error) throw error;
+    if (error) throw new Error("Path not found");
 
     const stream = fs.createWriteStream(pathTXT)
 
