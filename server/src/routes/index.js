@@ -14,6 +14,12 @@ routes.get('/byState', (require, response) => {
   response.json(byState)
 })
 
+routes.get('/salary', (require, response) => {
+  const {min, max} = require.body
+  const bySalaryRange = employeesMethods.salaryRange(min, max);
+  response.json(bySalaryRange)
+})
+
 routes.get('/', (require, response) => {
   const allEmployees = employeesMethods.getAll();
   response.json({allEmployees})

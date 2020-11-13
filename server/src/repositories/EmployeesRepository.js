@@ -26,7 +26,14 @@ const employeesMethods = {
       countState[emp.ufNascimento] += 1
     })
     return countState
+  },
+
+  salaryRange:(min, max)=>{
+    const employeesRange = employees.filter(emp => emp.salario >= min && emp.salario <= max)
+
+    return employeesRange
   }
+
 }
 
 export default employeesMethods;
