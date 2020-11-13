@@ -6,6 +6,15 @@ const employeesMethods = {
 
   getAll: () =>{
     return employees
+  },
+
+  search:(key, value) =>{
+    const employee = employees.filter(emp => {
+      if(emp[key] == value){
+        return emp;
+      }
+    })
+    return employee;
   }
 
 }
