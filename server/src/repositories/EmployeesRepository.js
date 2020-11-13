@@ -1,5 +1,6 @@
 import createEmployeesService from '../services/CreateEmployeesService';
 import createNewDataBaseService from '../services/CreateNewDataBaseService';
+import dataValidations from './validations'
 
 //Criando a lista de funcionarios
 let employees = createEmployeesService();
@@ -11,14 +12,22 @@ const employeesMethods = {
   },
 
   search:(key, value) =>{
-    const employee = employees.filter(emp => {
-      //Fazendo um filtro se a chave do objeto for igual a key e o valor dessa chave for igual a value,
-      //retornar o funcionario
-      if(emp[key] == value){
-        return emp;
-      }
-    })
-    return employee;
+    try{
+      dataValidations("Key", key, employees)
+
+      const employee = employees.filter(emp => {
+        //Fazendo um filtro se a chave do objeto for igual a key e o valor dessa chave for igual a value,
+        //retornar o funcionario
+        if(emp[key] == value){
+          return emp;
+        }
+      })
+      return employee;
+
+    }catch(e){
+      return {message: e.message}
+    }
+
   },
 
   countByState:() =>{
@@ -36,20 +45,25 @@ const employeesMethods = {
   },
 
   salaryRange:(min, max)=>{
-    const employeesRange = employees.filter(emp => emp.salario >= min && emp.salario <= max)
+    try{
 
-    return employeesRange
+      dataValidations("Range", `${min}-${max}`)
+
+      const employeesRange = employees.filter(emp => emp.salario >= min && emp.salario <= max)
+
+      return employeesRange
+
+    }catch(e){
+      return {message: e.message}
+    }
+
   },
 
   deleteEmployee: (cpf)=>{
     try{
-      const employeeExists = employees.filter(emp => emp.cpf == cpf)
 
-      if(isNaN(cpf) || cpf.length != 11){
-        throw new Error("Invalid CPF")
-      }else if(employeeExists.length <= 0){
-        throw new Error("CPF not found")
-      }
+      dataValidations("CPF", cpf, employees)
+
       const newEmployees = employees.filter(emp => emp.cpf != cpf)
 
       createNewDataBaseService(newEmployees);
@@ -66,6 +80,18 @@ const employeesMethods = {
 
   createOrUpdate: ({dataCadastro, cargo, cpf, nome, ufNascimento, salario, status})=>{
     try{
+      dataValidations("Date", dataCadastro)
+
+      dataValidations("CPF", cpf, employees)
+
+      dataValidations("UF", ufNascimento)
+
+      dataValidations("Salary", salario)
+
+      dataValidations("Status", status)
+
+
+
       const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
 
       const [employeeExists] = employees.filter(emp => emp.cpf == cpf)
@@ -92,7 +118,7 @@ const employeesMethods = {
 
       return {message: msg}
     }catch(e){
-      return {message: e}
+      return {message: e.message}
     }
   }
 
