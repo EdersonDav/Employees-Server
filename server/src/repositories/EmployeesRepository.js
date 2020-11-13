@@ -44,9 +44,41 @@ const employeesMethods = {
         employees = createEmployeesService();
       }, 3000);
 
-      return {message: 'Employeer deleted'}
+      return {message: 'Deleted employee'}
     }catch(e){
-      return {message: 'Erro ao deletar'}
+      return {message: e}
+    }
+  },
+
+  createOrUpdate: ({dataCadastro, cargo, cpf, nome, ufNascimento, salario, status})=>{
+    try{
+      const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
+
+      const [employeeExists] = employees.filter(emp => emp.cpf == cpf)
+
+      const employeeIndex = employees.indexOf(employeeExists)
+
+      const newEmployees = employees
+
+      let msg =""
+
+      if(employeeIndex != -1){
+        msg = "Updated employee"
+        newEmployees[employeeIndex] = employeeCreate
+      }else{
+        msg ="Employee created"
+        newEmployees.push(employeeCreate)
+      }
+
+      createNewDataBaseService(newEmployees);
+
+      setTimeout(() => {
+        employees = createEmployeesService();
+      }, 3000);
+
+      return {message: msg}
+    }catch(e){
+      return {message: e}
     }
   }
 

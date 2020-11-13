@@ -31,4 +31,13 @@ routes.delete('/:cpf', (require, response) => {
   response.json(newEmployees)
 })
 
+routes.post('/', (require, response) => {
+  const {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status} = require.body
+
+  const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
+
+  const newEmployees = employeesMethods.createOrUpdate(employeeCreate)
+  response.json(newEmployees)
+})
+
 export default routes;
