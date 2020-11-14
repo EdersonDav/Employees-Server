@@ -9,10 +9,8 @@ let employeesTest = dataTest
 
 const employeesMethods = {
   getAll: (isTest) =>{
-    let employeesInFunction = employees
-    if(isTest){
-      employeesInFunction = employeesTest
-    }
+    let employeesInFunction =  isTest ? employeesTest : employees
+
     //Retornando a lista completa de funcionarios
     return employeesInFunction
   },
@@ -20,6 +18,7 @@ const employeesMethods = {
   search: (key, value, isTest = false) =>{
     try{
       let employeesInFunction =  isTest ? employeesTest : employees
+
       dataValidations("Key", key, employeesInFunction)
 
       const employee = employeesInFunction.filter(emp => {
@@ -38,10 +37,8 @@ const employeesMethods = {
   },
 
   countByState:(isTest = false) =>{
-    let employeesInFunction = employees
-      if(isTest){
-        employeesInFunction = employeesTest
-      }
+    let employeesInFunction =  isTest ? employeesTest : employees
+
     const countState = {}
     employeesInFunction.forEach(emp =>{
       //Percorrendo cada funcionario e verificando se no countState existe o UF do funcionario
@@ -57,10 +54,7 @@ const employeesMethods = {
 
   salaryRange:(min, max, isTest = false)=>{
     try{
-      let employeesInFunction = employees
-      if(isTest){
-        employeesInFunction = employeesTest
-      }
+      let employeesInFunction =  isTest ? employeesTest : employees
 
       dataValidations("Range", `${min}-${max}`)
 
@@ -76,10 +70,7 @@ const employeesMethods = {
 
   deleteEmployee: (cpf, isTest = false)=>{
     try{
-      let employeesInFunction = employees
-      if(isTest){
-        employeesInFunction = employeesTest
-      }
+      let employeesInFunction =  isTest ? employeesTest : employees
 
       dataValidations("CPF", cpf, employeesInFunction)
 
@@ -104,10 +95,8 @@ const employeesMethods = {
 
   createOrUpdate: ({dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}, isTest = false)=>{
     try{
-      let employeesInFunction = employees
-      if(isTest){
-        employeesInFunction = employeesTest
-      }
+      let employeesInFunction =  isTest ? employeesTest : employees
+
       dataValidations("Date", dataCadastro)
 
       dataValidations("CPFCreate", cpf, employeesInFunction)

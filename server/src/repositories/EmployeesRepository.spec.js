@@ -16,7 +16,10 @@ describe("List the number of employees by state", () => {
 
   it('should be able to list quantity employees by state', () =>{
     const employees = employeesMethods.countByState(true);
+
+    //Verificando se as chaves do objeto employees é igual as UFs da minha base de dados
     expect(Object.keys(employees)).toEqual([ 'AP', 'RO', 'RJ' ])
+
     expect(employees.AP).toBe(1)
     expect(employees.RO).toBe(1)
     expect(employees.RJ).toBe(1)
