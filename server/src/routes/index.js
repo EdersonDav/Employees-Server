@@ -5,7 +5,7 @@ const routes = express.Router();
 
 routes.get('/search', (require, response) => {
   const {key, value} = require.body
-  const searchEmployee = employeesMethods.search(key, value, true );
+  const searchEmployee = employeesMethods.search(key, value );
   response.json(searchEmployee)
 })
 

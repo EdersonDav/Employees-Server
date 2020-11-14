@@ -27,7 +27,7 @@ const dataValidation= ( type, data, employees = null)=>{
     case "Range":
       //Separando valor minimo e maximo
       const [min,max] = data.split("-")
-      if(min > max){
+      if(Number(min) > Number(max)){
         throw new Error("Minimum value cannot be greater than maximum value")
       }
       break;

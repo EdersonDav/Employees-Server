@@ -1,41 +1,20 @@
 const createEmployeesService = require('../services/CreateEmployeesService');
 const createNewDataBaseService = require('../services/CreateNewDataBaseService');
 const dataValidations = require('./validations');
+const dataTest = require('./fake/dataTest');
 
 //Criando a lista de funcionarios
 let employees = createEmployeesService();
-let employeesTest = [{
-  "dataCadastro": "15/04/2017",
-  "cargo": "Dev Jr",
-  "cpf": "85235708709",
-  "nome": "Pedro",
-  "ufNascimento": "AP",
-  "salario": "8965.30",
-  "status": "ATIVO"
-},
-{
-  "dataCadastro": "19/04/2017",
-  "cargo": "AC Sr",
-  "cpf": "59984408701",
-  "nome": "Maria",
-  "ufNascimento": "RO",
-  "salario": "5312.70",
-  "status": "BLOQUEADO"
-},
-{
-  "dataCadastro": "03/04/2017",
-  "cargo": "Analista Sr",
-  "cpf": "51704568080",
-  "nome": "Jose",
-  "ufNascimento": "RJ",
-  "salario": "5448.60",
-  "status": "ATIVO"
-}];
+let employeesTest = dataTest
 
 const employeesMethods = {
-  getAll: () =>{
+  getAll: (isTest) =>{
+    let employeesInFunction = employees
+    if(isTest){
+      employeesInFunction = employeesTest
+    }
     //Retornando a lista completa de funcionarios
-    return employeesTest
+    return employeesInFunction
   },
 
   search: (key, value, isTest = false) =>{
@@ -106,11 +85,16 @@ const employeesMethods = {
 
       const newEmployees = employeesInFunction.filter(emp => emp.cpf != cpf)
 
-      createNewDataBaseService(newEmployees);
+      if(!isTest){
+        createNewDataBaseService(newEmployees);
 
-      setTimeout(() => {
-        employees = createEmployeesService();
-      }, 1000);
+        setTimeout(() => {
+          employees = createEmployeesService();
+        }, 1000);
+      }else{
+        employeesTest = newEmployees
+      }
+
 
       return {message: 'Deleted employee'}
     }catch(e){
