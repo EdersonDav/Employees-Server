@@ -39,42 +39,25 @@ describe("List employees by range salary", () => {
   })
 })
 
-describe("Delete employee CPF", () => {
-  it('should be able to deleted employee by CPF', () =>{
-    const employees = employeesMethods.deleteEmployee("51704568080", true)
-    const newListEmployees = employeesMethods.getAll(true)
-    const employeesByCPF = employeesMethods.search("cpf", "51704568080", true );
-
-    expect(employees.message).toBe("Deleted employee")
-    expect(newListEmployees.length).toBe(2)
-    expect(employeesByCPF.length).toBe(0)
-  })
-
-  it('should be not able to deleted employee by CPF', () =>{
-    const employees = employeesMethods.deleteEmployee("5170456808", true)
-
-    expect(employees.message).toBe("Invalid CPF")
-  })
-})
-
 describe("Create employee", () => {
   it('should be able to create employee', () =>{
     const employeeCreate = {
       dataCadastro: "03/04/2018",
       cargo: "CEO",
-      cpf: "44865722593",
+      cpf: "44865722598",
       nome: "Luiza",
       ufNascimento: "RO",
       salario: "18098.50",
       status: "ATIVO"
     }
-    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
-    const newListEmployees = employeesMethods.getAll(true)
-    const employeesByCPF = employeesMethods.search("cpf", "44865722593", true );
 
+    const oldEmployeesByCPF = employeesMethods.search("cpf", "44865722598", true );
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+    const employeesByCPF = employeesMethods.search("cpf", "44865722598", true );
+
+    expect(oldEmployeesByCPF.length).toBe(0)
     expect(employees.message).toBe("Employee created")
-    expect(newListEmployees.length).toBe(3)
-    expect(newListEmployees[2].nome).toBe("Luiza")
+    expect(employeesByCPF[0].nome).toBe("Luiza")
     expect(employeesByCPF.length).toBe(1)
   })
 
@@ -159,3 +142,45 @@ describe("Create employee", () => {
   })
 
 })
+
+describe("Delete employee CPF", () => {
+  it('should be able to deleted employee by CPF', () =>{
+    const oldListEmployees = employeesMethods.getAll(true)
+    const employees = employeesMethods.deleteEmployee("51704568080", true)
+    const newListEmployees = employeesMethods.getAll(true)
+    const employeesByCPF = employeesMethods.search("cpf", "51704568080", true );
+
+    expect(employees.message).toBe("Deleted employee")
+    expect(newListEmployees.length).toEqual(oldListEmployees.length - 1)
+    expect(employeesByCPF.length).toBe(0)
+  })
+
+  it('should be not able to deleted employee by CPF', () =>{
+    const employees = employeesMethods.deleteEmployee("5170456808", true)
+
+    expect(employees.message).toBe("Invalid CPF")
+  })
+})
+
+describe("Upate employee", () => {
+  it('should be able to update employee', () =>{
+    const employeeUpate = {
+      dataCadastro: "15/04/2017",
+      cargo: "Dev Pleno",
+      cpf: "85235708709",
+      nome: "Pedro",
+      ufNascimento: "AP",
+      salario: "8965.30",
+      status: "BLOQUEADO"
+    }
+    const oldListEmployees = employeesMethods.getAll(true)
+    const employees = employeesMethods.createOrUpdate(employeeUpate, true)
+    const newListEmployees = employeesMethods.getAll(true)
+    const employeesByCPF = employeesMethods.search("cpf", "85235708709", true );
+
+    expect(employees.message).toBe("Updated employee")
+    expect(newListEmployees.length).toEqual(oldListEmployees.length)
+    expect(employeesByCPF[0].cargo).toBe("Dev Pleno")
+  })
+})
+
