@@ -136,11 +136,15 @@ const employeesMethods = {
         newEmployees.push(employeeCreate)
       }
 
-      createNewDataBaseService(newEmployees);
+      if(!isTest){
+        createNewDataBaseService(newEmployees);
 
-      setTimeout(() => {
-        employees = createEmployeesService();
-      }, 1000);
+        setTimeout(() => {
+          employees = createEmployeesService();
+        }, 1000);
+      }else{
+        employeesTest = newEmployees
+      }
 
       return {message: msg}
     }catch(e){

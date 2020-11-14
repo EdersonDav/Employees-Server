@@ -40,7 +40,6 @@ describe("List employees by range salary", () => {
 })
 
 describe("Delete employee CPF", () => {
-
   it('should be able to deleted employee by CPF', () =>{
     const employees = employeesMethods.deleteEmployee("51704568080", true)
     const newListEmployees = employeesMethods.getAll(true)
@@ -56,4 +55,107 @@ describe("Delete employee CPF", () => {
 
     expect(employees.message).toBe("Invalid CPF")
   })
+})
+
+describe("Create employee", () => {
+  it('should be able to create employee', () =>{
+    const employeeCreate = {
+      dataCadastro: "03/04/2018",
+      cargo: "CEO",
+      cpf: "44865722593",
+      nome: "Luiza",
+      ufNascimento: "RO",
+      salario: "18098.50",
+      status: "ATIVO"
+    }
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+    const newListEmployees = employeesMethods.getAll(true)
+    const employeesByCPF = employeesMethods.search("cpf", "44865722593", true );
+
+    expect(employees.message).toBe("Employee created")
+    expect(newListEmployees.length).toBe(3)
+    expect(newListEmployees[2].nome).toBe("Luiza")
+    expect(employeesByCPF.length).toBe(1)
+  })
+
+  it('should not be able to create an employee because of the date', () =>{
+    const employeeCreate = {
+      dataCadastro: "03-04-2018",
+      cargo: "CEO",
+      cpf: "44865722593",
+      nome: "Luiza",
+      ufNascimento: "RO",
+      salario: "18098.50",
+      status: "ATIVO"
+    }
+
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+
+    expect(employees.message).toBe("Invalid Date")
+  })
+
+  it('should not be able to create an employee because of the CPF', () =>{
+    const employeeCreate = {
+      dataCadastro: "03/04/2018",
+      cargo: "CEO",
+      cpf: "444",
+      nome: "Luiza",
+      ufNascimento: "RO",
+      salario: "18098.50",
+      status: "ATIVO"
+    }
+
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+
+    expect(employees.message).toBe("Invalid CPF")
+  })
+
+  it('should not be able to create an employee because of the state', () =>{
+    const employeeCreate = {
+      dataCadastro: "03/04/2018",
+      cargo: "CEO",
+      cpf: "44865722593",
+      nome: "Luiza",
+      ufNascimento: "R",
+      salario: "18098.50",
+      status: "ATIVO"
+    }
+
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+
+    expect(employees.message).toBe("Invalid UF")
+  })
+
+  it('should not be able to create an employee because of the salary', () =>{
+    const employeeCreate = {
+      dataCadastro: "03/04/2018",
+      cargo: "CEO",
+      cpf: "44865722593",
+      nome: "Luiza",
+      ufNascimento: "RO",
+      salario: "1809T8.50",
+      status: "ATIVO"
+    }
+
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+
+    expect(employees.message).toBe("Invalid Salary")
+  })
+
+  it('should not be able to create an employee because of the status', () =>{
+    const employeeCreate = {
+      dataCadastro: "03/04/2018",
+      cargo: "CEO",
+      cpf: "44865722593",
+      nome: "Luiza",
+      ufNascimento: "RO",
+      salario: "18098.50",
+      status: "NA"
+    }
+
+    const employees = employeesMethods.createOrUpdate(employeeCreate, true)
+
+    expect(employees.message).toBe("Invalid Status")
+  })
+
 })
