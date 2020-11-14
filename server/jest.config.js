@@ -21,7 +21,8 @@ module.exports = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-    '<rootDir>/src/services/*.js'
+    '<rootDir>/src/services/*.js',
+    '<rootDir>/src/repositories/*.js'
   ],
 
   // The directory where Jest should output its coverage files
@@ -190,5 +191,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-  testTimeout: 500
 };
