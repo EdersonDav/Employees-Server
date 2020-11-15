@@ -69,24 +69,24 @@ app.listen(Trocar para a porta desejada, () => {
 
 ### Inicialização
 
-> A inicialização do projeto parte do arquivo _**index.js**_, localizado na raiz do projeto, que importa o arquivo de rotas.
+A inicialização do projeto parte do arquivo _**index.js**_, localizado na raiz do projeto, que importa o arquivo de rotas.
 
 ### Rotas
 
-> O arquivo de rotas está localizado em _**src/routes/index.js**_, a responsabilidade do código deste arquivo é de receber as requisições, chamar os metodos de _**EmployeesRepository.js**_ e devolver na response o retorno dos metodos.
+O arquivo de rotas está localizado em _**src/routes/index.js**_, a responsabilidade do código deste arquivo é de receber as requisições, chamar os metodos de _**EmployeesRepository.js**_ e devolver na response o retorno dos metodos.
 
 ## Repository
 
-> O arquivo _**EmployeesRepository.js**_ está localizado em _**src/repositories/EmployeesRepository.js**_, este arquivo contém um objeto com várias funções, cada uma tem a responsabilidade de receber ou não por parâmetro uma informação, fazer a validação das informações recebidas, invocando o metodo `dataValidation` do arquivo _**validations.js**_ localizado na mesma pasta que tem apenas a funcionalidade de validar os dados e executar um erro se necessário, e retornar as informações de acordo com a sua função.
-> As informações devolvidas vem do arquivo de servico _**CreateEmployeesService.js**_
+O arquivo _**EmployeesRepository.js**_ está localizado em _**src/repositories/EmployeesRepository.js**_, este arquivo contém um objeto com várias funções, cada uma tem a responsabilidade de receber ou não por parâmetro uma informação, fazer a validação das informações recebidas, invocando o metodo `dataValidation` do arquivo _**validations.js**_ localizado na mesma pasta que tem apenas a funcionalidade de validar os dados e executar um erro se necessário, e retornar as informações de acordo com a sua função.
+As informações devolvidas vem do arquivo de servico _**CreateEmployeesService.js**_
 
 ## Sercices
 
-> Em _**src/services**_ existem 2 arquivos de serviços, que são os _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_.
+Em _**src/services**_ existem 2 arquivos de serviços, que são os _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_.
 
-> **CreateEmployeesService.js** : Tem a responsabilidade de ler a base de dados .txt e retornar um array de objetos com as suas informações. Ele é chamado no inicio do arquivo _**EmployeesRepository.js**_ ou dentro dos metodo de criação ou atualização, ou no metodo que deleta o funcionario, assim resetando os dados.
+**CreateEmployeesService.js** : Tem a responsabilidade de ler a base de dados .txt e retornar um array de objetos com as suas informações. Ele é chamado no inicio do arquivo _**EmployeesRepository.js**_ ou dentro dos metodo de criação ou atualização, ou no metodo que deleta o funcionario, assim resetando os dados.
 
-> **CreateNewDataBaseService.js** : Quando é criado um novo funcionario excluido ou atualizado, esse serviço é chamado enviando como parâmetro um array com os dados atualizado, ao receber os dados ele cria um novo arquivo .txt com o mesmo nome do antigo, assim substituindo o mesmo.
+**CreateNewDataBaseService.js** : Quando é criado um novo funcionario excluido ou atualizado, esse serviço é chamado enviando como parâmetro um array com os dados atualizado, ao receber os dados ele cria um novo arquivo .txt com o mesmo nome do antigo, assim substituindo o mesmo.
 
 # 🧪 Testes
 
@@ -98,8 +98,8 @@ app.listen(Trocar para a porta desejada, () => {
 
 `yarn test`
 
-> Inicialmente os teste estão validando as funcionalidade do arquivo _**EmployeesRepository.js**_.
-> Existe testes criados para os arquivos _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_. Eles não estão sendo executados pois no teste está utilizando `setTimeout` do javascript para aguardar a leitura e atualização do txt, mas os mesmos estão interferindo na performance dos testes.
+Inicialmente os teste estão validando as funcionalidade do arquivo _**EmployeesRepository.js**_.
+Existe testes criados para os arquivos _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_. Eles não estão sendo executados pois no teste está utilizando `setTimeout` do javascript para aguardar a leitura e atualização do txt, mas os mesmos estão interferindo na performance dos testes.
 
 **Para rodar todos os teste, incluindo os do txt, na pasta raiz do projeto no arquivo `jest.config.js` substitua o código:**
 
@@ -122,6 +122,7 @@ testMatch: [
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [NodeJs](https://nodejs.org/en/)
 * [Jest](https://jestjs.io/)
+* [Swagger](https://swagger.io/)
 
 # ☕ Créditos
 
