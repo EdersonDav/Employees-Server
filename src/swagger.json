@@ -63,7 +63,7 @@
         "summary": "Get number employees by state",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "UF:number",
             "schema": {
               "$ref": "#/definitions/EmployeesUF"
             }
@@ -92,7 +92,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Employee Object",
             "schema": {
               "$ref": "#/definitions/Employees"
             }
@@ -121,7 +121,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Employee Object",
             "schema": {
               "$ref": "#/definitions/Employees"
             }
