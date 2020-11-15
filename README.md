@@ -80,7 +80,7 @@ O arquivo de rotas está localizado em _**src/routes/index.js**_, a responsabili
 O arquivo _**EmployeesRepository.js**_ está localizado em _**src/repositories/EmployeesRepository.js**_, este arquivo contém um objeto com várias funções, cada uma tem a responsabilidade de receber ou não por parâmetro uma informação, fazer a validação das informações recebidas, invocando o metodo `dataValidation` do arquivo _**validations.js**_ localizado na mesma pasta que tem apenas a funcionalidade de validar os dados e executar um erro se necessário, e retornar as informações de acordo com a sua função.
 As informações devolvidas vem do arquivo de servico _**CreateEmployeesService.js**_
 
-## Sercices
+## Services
 
 Em _**src/services**_ existem 2 arquivos de serviços, que são os _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_.
 
