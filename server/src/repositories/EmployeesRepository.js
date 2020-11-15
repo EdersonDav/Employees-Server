@@ -60,7 +60,17 @@ const employeesMethods = {
 
       const employeesRange = employeesInFunction.filter(emp => emp.salario >= min && emp.salario <= max)
 
-      return employeesRange
+      const employeesRangeSort = employeesRange.sort( (emp1, emp2) => {
+        if (Number(emp1.salario) > Number(emp2.salario)) {
+          return 1;
+        }
+        if (Number(emp1.salario) < Number(emp2.salario)) {
+          return -1;
+        }
+        return 0;
+      })
+
+      return employeesRangeSort
 
     }catch(e){
       return {message: e.message}

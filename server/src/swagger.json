@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Employees API",
+    "description": "Employees API Informations",
+    "servers": [
+      "http://localhost:5000"
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get all employees in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employees"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Create or Update a new employee in system",
+        "requestBody": {
+          "description": "Employee Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Employees"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee created or updated"
+          }
+        }
+      }
+    },
+    "/byState": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get number employees by state",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EmployeesUF"
+            }
+          }
+        }
+      }
+    },
+    "/search/{key-value}": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee by key and value",
+        "parameters": [
+          {
+            "name": "key-value",
+            "in": "path",
+            "required": true,
+            "description": "Field name and value of this field that you want to search for in 'key-value' format",
+            "type": "string",
+            "example": "nome-Example Name",
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employees"
+            }
+          }
+        }
+      }
+    },
+    "/salary/{min-max}": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employees by range salary",
+        "parameters": [
+          {
+            "name": "min-max",
+            "in": "path",
+            "required": true,
+            "description": "Get employees by range salary, with max value and min value",
+            "type": "string",
+            "example": "1100.00-1150.00",
+            "schema": {
+              "$ref": "#/definitions/Range"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employees"
+            }
+          }
+        }
+      }
+    },
+    "/{CPF}": {
+      "delete": {
+        "summary": "Delete employee with given CPF",
+        "tags": [
+          "Employees"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CPF",
+            "required": true,
+            "description": "Delete employee with CPF",
+            "example": "00000000000",
+            "schema": {
+              "$ref": "#/definitions/CPF"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted employee"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Search": {
+      "type": "string",
+      "properties": {
+        "key-value": {
+          "type": "string"
+        }
+      }
+    },
+    "Range": {
+      "type": "string",
+      "properties": {
+        "min-max": {
+          "type": "string"
+        }
+      }
+    },
+    "CPF": {
+      "type": "string",
+      "properties": {
+        "CPF": {
+          "type": "string"
+        }
+      }
+    },
+    "Employees": {
+      "type": "object",
+      "properties": {
+        "dataCadastro": {
+          "example": "00/00/0000",
+          "type": "string"
+        },
+        "cargo": {
+          "example": "Example",
+          "type": "string"
+        },
+        "cpf": {
+          "example": "00000000000",
+          "type": "string"
+        },
+        "nome": {
+          "example": "Example Name",
+          "type": "string"
+        },
+        "ufNascimento": {
+          "example": "AA",
+          "type": "string"
+        },
+        "salario": {
+          "example": "1000.00",
+          "type": "string"
+        },
+        "status": {
+          "example": "ATIVO or BLOQUEADO",
+          "type": "string"
+        }
+      }
+    },
+    "EmployeesUF": {
+      "type": "object",
+      "properties": {
+        "UF": {
+          "example": 1,
+          "type": "number"
+        }
+      }
+    }
+  }
+}

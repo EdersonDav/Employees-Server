@@ -31,8 +31,11 @@ describe("List employees by range salary", () => {
   it('should be able to list employees by range salary', () =>{
     const employees = employeesMethods.salaryRange(5000.10, 6000,99, true);
 
+    const employeesSort = Number(employees[0].salario) <= Number(employees[1].salario)
+
     expect(employees.length).toBe(2)
     expect(employees[0].nome).toBe("Maria")
+    expect(employeesSort).toBe(true)
   })
 
   it('should be not able to list employees by range salary', () =>{

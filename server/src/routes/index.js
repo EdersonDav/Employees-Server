@@ -1,10 +1,12 @@
 const express = require('express');
+
 const employeesMethods = require('../repositories/EmployeesRepository');
 
 const routes = express.Router();
 
-routes.get('/search', (require, response) => {
-  const {key, value} = require.body
+routes.get('/search/:key', (require, response) => {
+  const keyAndValue = require.params.key
+  const [key, value] = keyAndValue.split("-")
   const searchEmployee = employeesMethods.search(key, value );
   response.json(searchEmployee)
 })
@@ -14,15 +16,17 @@ routes.get('/byState', (require, response) => {
   response.json(byState)
 })
 
-routes.get('/salary', (require, response) => {
-  const {min, max} = require.body
+routes.get('/salary/:range', (require, response) => {
+  const range = require.params.range
+  const [min, max] = range.split("-")
   const bySalaryRange = employeesMethods.salaryRange(min, max);
   response.json(bySalaryRange)
 })
 
 routes.get('/', (require, response) => {
   const allEmployees = employeesMethods.getAll();
-  response.json(allEmployees)
+  const employees = allEmployees.filter(emp => emp != null)
+  response.json(employees)
 })
 
 routes.delete('/:cpf', (require, response) => {
