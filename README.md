@@ -1,6 +1,6 @@
-# Back-End Projeto CRUD fucionários Allugator
+# Back-End Projeto CRUD Funcionários Allugator
 
->Crie, liste, atualize e exclua funcionarios de sua base de dados
+>Crie, liste, atualize e exclua funcionários de sua base de dados
 
 [![Author](https://img.shields.io/badge/author-EdersonDav-000000?style=flat-square)](https://github.com/EdersonDav)
 
@@ -41,7 +41,7 @@
 
 ### Instalação de dependências
 
-**No terminal dentro da pasta raiz do projeto, execute o comando**
+**No terminal, dentro da pasta raiz do projeto, execute o comando**
 
 `yarn`
 
@@ -61,7 +61,7 @@ app.listen(Trocar para a porta desejada, () => {
 
 `yarn server`
 
-**Para acessar a documentação das rotas no swagger acesse:**
+**Para acessar a documentação das rotas no Swagger acesse:**
 
 `http://localhost:5000/swagger/`
 
@@ -73,20 +73,20 @@ A inicialização do projeto parte do arquivo _**index.js**_, localizado na raiz
 
 ### Rotas
 
-O arquivo de rotas está localizado em _**src/routes/index.js**_, a responsabilidade do código deste arquivo é de receber as requisições, chamar os metodos de _**EmployeesRepository.js**_ e devolver na response o retorno dos metodos.
+O arquivo de rotas está localizado em _**src/routes/index.js**_, a responsabilidade do código deste arquivo é de receber as requisições, chamar os métodos de _**EmployeesRepository.js**_ e devolver na response o retorno dos métodos.
 
 ## Repository
 
-O arquivo _**EmployeesRepository.js**_ está localizado em _**src/repositories/EmployeesRepository.js**_, este arquivo contém um objeto com várias funções, cada uma tem a responsabilidade de receber ou não por parâmetro uma informação, fazer a validação das informações recebidas, invocando o metodo `dataValidation` do arquivo _**validations.js**_ localizado na mesma pasta que tem apenas a funcionalidade de validar os dados e executar um erro se necessário, e retornar as informações de acordo com a sua função.
-As informações devolvidas vem do arquivo de servico _**CreateEmployeesService.js**_
+O arquivo _**EmployeesRepository.js**_ está localizado em _**src/repositories/EmployeesRepository.js**_, este arquivo contém um objeto com várias funções, cada uma tem a responsabilidade de receber ou não por parâmetro uma informação, fazer a validação das informações recebidas, invocando o método `dataValidation` do arquivo _**validations.js**_ localizado na mesma pasta que tem apenas a funcionalidade de validar os dados e executar um erro se necessário, e retornar as informações de acordo com a sua função.
+As informações devolvidas vem do arquivo de serviço _**CreateEmployeesService.js**_
 
 ## Services
 
 Em _**src/services**_ existem 2 arquivos de serviços, que são os _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_.
 
-**CreateEmployeesService.js** : Tem a responsabilidade de ler a base de dados .txt e retornar um array de objetos com as suas informações. Ele é chamado no inicio do arquivo _**EmployeesRepository.js**_ ou dentro dos metodo de criação ou atualização, ou no metodo que deleta o funcionario, assim resetando os dados.
+**CreateEmployeesService.js** : Tem a responsabilidade de ler a base de dados .txt e retornar um array de objetos com as suas informações. Ele é chamado no inicio do arquivo _**EmployeesRepository.js**_ ou dentro dos métodos de criação ou atualização, ou no método que deleta o funcionário, assim resetando os dados.
 
-**CreateNewDataBaseService.js** : Quando é criado um novo funcionario excluido ou atualizado, esse serviço é chamado enviando como parâmetro um array com os dados atualizado, ao receber os dados ele cria um novo arquivo .txt com o mesmo nome do antigo, assim substituindo o mesmo.
+**CreateNewDataBaseService.js** : Quando é criado um novo funcionário excluido ou atualizado, esse serviço é chamado enviando como parâmetro um array com os dados atualizados. Ao receber os dados, ele cria um novo arquivo .txt com o mesmo nome do antigo, assim substituindo o mesmo.
 
 # 🧪 Testes
 
@@ -98,7 +98,7 @@ Em _**src/services**_ existem 2 arquivos de serviços, que são os _**CreateEmpl
 
 `yarn test`
 
-Inicialmente os teste estão validando as funcionalidade do arquivo _**EmployeesRepository.js**_.
+Inicialmente os teste estão validando as funcionalidades do arquivo _**EmployeesRepository.js**_.
 Existe testes criados para os arquivos _**CreateEmployeesService.js**_ e _**CreateNewDataBaseService.js**_. Eles não estão sendo executados pois no teste está utilizando `setTimeout` do javascript para aguardar a leitura e atualização do txt, mas os mesmos estão interferindo na performance dos testes.
 
 **Para rodar todos os teste, incluindo os do txt, na pasta raiz do projeto no arquivo `jest.config.js` substitua o código:**
