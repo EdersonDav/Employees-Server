@@ -8,7 +8,7 @@ describe("Search employee", () => {
 
   it('should not be able to search for an employee', () =>{
     const employees = employeesMethods.search("----", "Jose", true );
-    expect(employees.message).toBe("Invalid Key");
+    expect(employees.message).toBe("Campo inválido");
   })
 })
 
@@ -41,7 +41,7 @@ describe("List employees by range salary", () => {
   it('should be not able to list employees by range salary', () =>{
     const employees = employeesMethods.salaryRange(10000.10, 6000,99, true);
 
-    expect(employees.message).toBe("Minimum value cannot be greater than maximum value")
+    expect(employees.message).toBe("O valor minímo não pode ser maior que o máximo")
   })
 })
 
@@ -62,7 +62,7 @@ describe("Create employee", () => {
     const employeesByCPF = employeesMethods.search("cpf", "44865722598", true );
 
     expect(oldEmployeesByCPF.length).toBe(0)
-    expect(employees.message).toBe("Employee created")
+    expect(employees.message).toBe("Funcionário criado com sucesso")
     expect(employeesByCPF[0].nome).toBe("Luiza")
     expect(employeesByCPF.length).toBe(1)
   })
@@ -80,7 +80,7 @@ describe("Create employee", () => {
 
     const employees = employeesMethods.createOrUpdate(employeeCreate, true)
 
-    expect(employees.message).toBe("Invalid Date")
+    expect(employees.message).toBe("Data inválida")
   })
 
   it('should not be able to create an employee because of the CPF', () =>{
@@ -96,7 +96,7 @@ describe("Create employee", () => {
 
     const employees = employeesMethods.createOrUpdate(employeeCreate, true)
 
-    expect(employees.message).toBe("Invalid CPF")
+    expect(employees.message).toBe("CPF inválido")
   })
 
   it('should not be able to create an employee because of the state', () =>{
@@ -112,7 +112,7 @@ describe("Create employee", () => {
 
     const employees = employeesMethods.createOrUpdate(employeeCreate, true)
 
-    expect(employees.message).toBe("Invalid UF")
+    expect(employees.message).toBe("UF inválido")
   })
 
   it('should not be able to create an employee because of the salary', () =>{
@@ -128,7 +128,7 @@ describe("Create employee", () => {
 
     const employees = employeesMethods.createOrUpdate(employeeCreate, true)
 
-    expect(employees.message).toBe("Invalid Salary")
+    expect(employees.message).toBe("Salário inválido")
   })
 
   it('should not be able to create an employee because of the status', () =>{
@@ -144,7 +144,7 @@ describe("Create employee", () => {
 
     const employees = employeesMethods.createOrUpdate(employeeCreate, true)
 
-    expect(employees.message).toBe("Invalid Status")
+    expect(employees.message).toBe("Status inválido")
   })
 
 })
@@ -156,7 +156,7 @@ describe("Delete employee CPF", () => {
     const newListEmployees = employeesMethods.getAll(true)
     const employeesByCPF = employeesMethods.search("cpf", "51704568080", true );
 
-    expect(employees.message).toBe("Deleted employee")
+    expect(employees.message).toBe("Funcionário deletado")
     expect(newListEmployees.length).toEqual(oldListEmployees.length - 1)
     expect(employeesByCPF.length).toBe(0)
   })
@@ -164,7 +164,7 @@ describe("Delete employee CPF", () => {
   it('should be not able to deleted employee by CPF', () =>{
     const employees = employeesMethods.deleteEmployee("5170456808", true)
 
-    expect(employees.message).toBe("Invalid CPF")
+    expect(employees.message).toBe("CPF inválido")
   })
 })
 
@@ -184,7 +184,7 @@ describe("Upate employee", () => {
     const newListEmployees = employeesMethods.getAll(true)
     const employeesByCPF = employeesMethods.search("cpf", "85235708709", true );
 
-    expect(employees.message).toBe("Updated employee")
+    expect(employees.message).toBe("Funcionário atualizado com sucesso")
     expect(newListEmployees.length).toEqual(oldListEmployees.length)
     expect(employeesByCPF[0].cargo).toBe("Dev Pleno")
   })

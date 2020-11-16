@@ -97,7 +97,7 @@ const employeesMethods = {
       }
 
 
-      return {message: 'Deleted employee'}
+      return {message: 'Funcionário deletado'}
     }catch(e){
       return {message: e.message}
     }
@@ -128,10 +128,10 @@ const employeesMethods = {
       let msg =""
 
       if(employeeIndex != -1){
-        msg = "Updated employee"
+        msg = "Funcionário atualizado com sucesso"
         newEmployees[employeeIndex] = employeeCreate
       }else{
-        msg ="Employee created"
+        msg ="Funcionário criado com sucesso"
         newEmployees.push(employeeCreate)
       }
 
