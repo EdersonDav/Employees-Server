@@ -9,11 +9,11 @@ routes.get('/search/:key', (require, response) => {
   const [key, value] = keyAndValue.split("-")
   const searchEmployee = employeesMethods.search(key, value );
 
-  if(searchEmployee.message == 'Invalid Key'){
+  if(searchEmployee.message == 'Campo inválido'){
     response.status(400).json(searchEmployee)
   }
   if(searchEmployee.length == 0){
-    response.status(404).json({message: "Employees not fount"})
+    response.status(404).json({message: "Funcionário não encontrado"})
   }
 
   response.json(searchEmployee)
@@ -29,7 +29,7 @@ routes.get('/salary/:range', (require, response) => {
   const [min, max] = range.split("-")
   const bySalaryRange = employeesMethods.salaryRange(min, max);
 
-  if(bySalaryRange.message == 'Invalid Salary' ||  bySalaryRange.message == 'Minimum value cannot be greater than maximum value'){
+  if(bySalaryRange.message == 'Salario inválido' ||  bySalaryRange.message == 'O valor minímo não pode ser maior que o máximo'){
     response.status(400).json(bySalaryRange)
   }
   response.json(bySalaryRange)
@@ -45,7 +45,7 @@ routes.delete('/:cpf', (require, response) => {
   const {cpf} = require.params
   const newEmployees = employeesMethods.deleteEmployee(cpf)
 
-  if(newEmployees.message == 'Invalid CPF' ||  newEmployees.message == 'CPF not found'){
+  if(newEmployees.message == 'CPF inválido' ||  newEmployees.message == 'CPF não encontrado'){
     response.status(400).json(newEmployees)
   }
   response.status(200).json(newEmployees)
@@ -58,7 +58,7 @@ routes.post('/', (require, response) => {
 
   const newEmployees = employeesMethods.createOrUpdate(employeeCreate)
 
-  if(newEmployees.message != "Updated employee"||  newEmployees.message != "Employee created"){
+  if(newEmployees.message != "Funcionário atualizado com sucesso" || newEmployees.message != "Funcionário criado com sucesso"){
     response.status(400).json(newEmployees)
   }
   response.status(200).json(newEmployees)
