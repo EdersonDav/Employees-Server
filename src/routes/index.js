@@ -5,18 +5,19 @@ const employeesMethods = require('../repositories/EmployeesRepository');
 const routes = express.Router();
 
 routes.get('/search/:key', (require, response) => {
-  const keyAndValue = require.params.key
-  const [key, value] = keyAndValue.split("-")
-  const searchEmployee = employeesMethods.search(key, value );
+  try{
+    const keyAndValue = require.params.key
+    let [key, value] = keyAndValue.split("-")
+    if(key == "dataCadastro"){
+      const valueDate = value.split(".")
+      value = `${valueDate[0]}/${valueDate[1]}/${valueDate[2]}`
+    }
+    const searchEmployee = employeesMethods.search(key, value );
 
-  if(searchEmployee.message == 'Campo inválido'){
-    response.status(400).json(searchEmployee)
+    response.status(200).json(searchEmployee)
+  }catch(err){
+    response.status(400).json(err)
   }
-  if(searchEmployee.length == 0){
-    response.status(404).json({message: "Funcionário não encontrado"})
-  }
-
-  response.json(searchEmployee)
 })
 
 routes.get('/byState', (require, response) => {
@@ -25,14 +26,15 @@ routes.get('/byState', (require, response) => {
 })
 
 routes.get('/salary/:range', (require, response) => {
-  const range = require.params.range
-  const [min, max] = range.split("-")
-  const bySalaryRange = employeesMethods.salaryRange(min, max);
+  try{
+    const range = require.params.range
+    const [min, max] = range.split("-")
+    const bySalaryRange = employeesMethods.salaryRange(min, max);
 
-  if(bySalaryRange.message == 'Salario inválido' ||  bySalaryRange.message == 'O valor minímo não pode ser maior que o máximo'){
-    response.status(400).json(bySalaryRange)
+    response.json(bySalaryRange)
+  }catch(err){
+    response.status(400).json(err)
   }
-  response.json(bySalaryRange)
 })
 
 routes.get('/', (require, response) => {
@@ -42,26 +44,28 @@ routes.get('/', (require, response) => {
 })
 
 routes.delete('/:cpf', (require, response) => {
-  const {cpf} = require.params
-  const newEmployees = employeesMethods.deleteEmployee(cpf)
+  try{
+    const {cpf} = require.params
+    const newEmployees = employeesMethods.deleteEmployee(cpf)
 
-  if(newEmployees.message == 'CPF inválido' ||  newEmployees.message == 'CPF não encontrado'){
-    response.status(400).json(newEmployees)
-  }
   response.status(200).json(newEmployees)
+  }catch(err){
+    response.status(400).json(err)
+  }
+
 })
 
 routes.post('/', (require, response) => {
-  const {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status} = require.body
+  try{
+    const {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status} = require.body
 
-  const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
+    const employeeCreate = {dataCadastro, cargo, cpf, nome, ufNascimento, salario, status}
 
-  const newEmployees = employeesMethods.createOrUpdate(employeeCreate)
-
-  if(newEmployees.message != "Funcionário atualizado com sucesso" || newEmployees.message != "Funcionário criado com sucesso"){
-    response.status(400).json(newEmployees)
+    const newEmployees = employeesMethods.createOrUpdate(employeeCreate)
+    response.status(200).json(newEmployees)
+  }catch(err){
+    response.status(400).json(err)
   }
-  response.status(200).json(newEmployees)
 
 })
 
