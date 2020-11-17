@@ -49,7 +49,17 @@ const employeesMethods = {
       }
       countState[emp.ufNascimento] += 1
     })
-    return countState
+    const counstStateeArray = []
+
+    for(const [key, value] of Object.entries(countState)){
+      counstStateeArray.push({
+        sigla: key,
+        value
+      });
+    }
+
+
+    return counstStateeArray
   },
 
   salaryRange:(min, max, isTest = false)=>{
