@@ -17,13 +17,13 @@
 # 🚀 Recursos
 
 - Leitura e atualização de txt que contém a base de dados.
-- Retorna funcionários por Nome.
-- Retorna funcionários por CPF.
-- Retorna funcionários por Cargo.
-- Retorna funcionários por Data de Cadastros.
-- Retorna quantidade de funcionários agrupados por UF de Nascimento.
-- Retorna funcionários por faixa salarial.
-- Retorna funcionários por status.
+- Pesquisar funcionários por Nome.
+- Pesquisar funcionários por CPF.
+- Pesquisar funcionários por Cargo.
+- Pesquisar funcionários por Data de Cadastros.
+- Pesquisar quantidade de funcionários agrupados por UF de Nascimento.
+- Pesquisar funcionários por faixa salarial.
+- Pesquisar funcionários por status.
 - Criar ou atualizar funcionários, caso já exista.
 - Excluir funcionário pelo número do CPF.
 
