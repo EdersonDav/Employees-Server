@@ -33,11 +33,11 @@
 
 **Para clonar o projeto via HTTPS, execute este comando:**
 
-`git clone https://github.com/EdersonDav/Allugator-BackEnd.git`
+`git clone https://github.com/EdersonDav/Funcionarios-Server`
 
 **Ou SSH com o comando:**
 
-`git clone git@github.com:EdersonDav/Allugator-BackEnd.git`
+`git clone git@github.com:EdersonDav/Funcionarios-Server.git`
 
 ### Instalação de dependências
 
